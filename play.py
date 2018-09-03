@@ -2,10 +2,19 @@
 from deck import Deck
 
 def printHand():
-    print('Dealer\'s Hand: {}, H'.format(d.deck.get()))
-    print('Your Hand: {}, {} '.format(d.deck.get(), d.deck.get()))
+    print('Dealer\'s Hand: {}, H'.format(dealer_hand[0]))
+    print('Your Hand: {}, {} '.format(player_hand[0], player_hand[1]))
+
+def deal():
+    player_hand.append(d.deck.get())
+    dealer_hand.append(d.deck.get())
+    player_hand.append(d.deck.get())
+    dealer_hand.append(d.deck.get())
 
 d = Deck()
+player_hand = []
+dealer_hand = []
+deal()
 printHand()
 choice = "play"
 
