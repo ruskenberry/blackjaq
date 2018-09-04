@@ -1,32 +1,31 @@
 #!usr/bin/python3
 from deck import Deck
+from table import Table
 
-def printHand():
-    print('Dealer\'s Hand: {}, H'.format(dealer_hand[0]))
-    print('Your Hand: {}, {} '.format(player_hand[0], player_hand[1]))
+t = Table()
+t.deal()
 
-def deal():
-    player_hand.append(d.deck.get())
-    dealer_hand.append(d.deck.get())
-    player_hand.append(d.deck.get())
-    dealer_hand.append(d.deck.get())
-
-d = Deck()
-player_hand = []
-dealer_hand = []
-deal()
-printHand()
 choice = "play"
+turn = True
+count = 0
+winner = -2
 
-while choice!= "quit":
-    choice = input("Hit (H), Stand (S), Split (SS), Double (D), Surrender (Su) ")
+while choice != 'quit':
+    if ((count != 0) and (t.check_hand(t.player_hand) >= 21 or t.check_hand(t.dealer_hand) >= 21)) or winner != -2:
+        t.new_hand = False
+        t.clear_table()
+        t.deal()        
+        winner = -2
+    choice = input("Hit (H), Stand (S), Split (SS), Double (D), Surrender (Su) ") 
     if choice == 'H':
         #hit
         print('Hitting')
-        printHand()
+        t.hit()
     elif choice == 'S':
         #stand
         print('Standing')
+        turn = False
+        winner = t.stand()
     elif choice == 'SS':
         #split
         print('Splitting')
@@ -42,5 +41,4 @@ while choice!= "quit":
     else:
         #command not recognized
         print('Error: Command not recognized')
-
-   
+    count += 1
