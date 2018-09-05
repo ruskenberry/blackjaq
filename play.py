@@ -11,7 +11,7 @@ count = 0
 winner = -2
 
 while choice != 'quit':
-    if ((count != 0) and (t.check_hand(t.player_hand) >= 21 or t.check_hand(t.dealer_hand) >= 21)) or winner != -2:
+    if (count != 0 and winner != -2):
         t.new_hand = False
         t.clear_table()
         t.deal()        
@@ -26,6 +26,12 @@ while choice != 'quit':
         print('Standing')
         turn = False
         winner = t.stand()
+        if(winner == -1):
+            print("House wins :(")
+        elif (winner == 0):
+            print("Push")
+        else:
+            print("You win! xD")
     elif choice == 'SS':
         #split
         print('Splitting')
