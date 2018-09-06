@@ -14,7 +14,6 @@ Usage
 TODOs
 -----
 
-* Add support for A's (11 or 1)
 * Split, Surrender, Double
 * Gambling?
 

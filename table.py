@@ -46,7 +46,7 @@ class Table:
         #player's turn
         self.player_hand.append(self.d.deck.get())
         self.print_hand(1) 
-        #self.print_hand_totas()
+        return self.check_winner()
 
     def stand(self):
         while self.check_hand(self.dealer_hand) <= 17:
@@ -58,13 +58,18 @@ class Table:
     def check_hand(self, hand):
         total = 0
         for c in hand:
-            total += self.d.values[c]
+            if total >= 11 and c  == 'A':
+                total += 1
+            else:
+                total += self.d.values[c]
         return total
 
     def check_winner(self):
-        if (self.check_hand(self.player_hand)) > 21 or self.check_hand(self.dealer_hand) <= 21 and self.check_hand(self.dealer_hand) > self.check_hand(self.player_hand):
+        if self.check_hand(self.dealer_hand) <= 21 and self.check_hand(self.dealer_hand) > self.check_hand(self.player_hand):
             return -1
         elif self.check_hand(self.dealer_hand) == self.check_hand(self.player_hand):
             return 0
+        elif self.check_hand(self.player_hand) > 21:
+            return -1
         else:
             return 1

@@ -8,19 +8,22 @@ t.deal()
 choice = "play"
 turn = True
 count = 0
-winner = -2
+winner = -3
 
 while choice != 'quit':
-    if (count != 0 and winner != -2):
+    if (count != 0 and winner != -3) or winner == -2:
+        print("*************************************")       
         t.new_hand = False
         t.clear_table()
         t.deal()        
-        winner = -2
+        winner = -3
     choice = input("Hit (H), Stand (S), Split (SS), Double (D), Surrender (Su) ") 
     if choice == 'H':
         #hit
         print('Hitting')
-        t.hit()
+        if t.hit() == -2:
+            t.stand()
+            winner = -2
     elif choice == 'S':
         #stand
         print('Standing')
