@@ -13,7 +13,7 @@ Usage
 
 TODOs
 -----
-
+* Robo-player
 * Split, Surrender, Double
 * Gambling?
 

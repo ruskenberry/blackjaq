@@ -6,28 +6,21 @@ t = Table()
 t.deal()
 
 choice = "play"
-turn = True
 count = 0
-winner = -3
 
 while choice != 'quit':
-    if (count != 0 and winner != -3) or winner == -2:
+    if (count != 0 and t.new_hand == True) or t.player_bust == True:
         print("*************************************")       
-        t.new_hand = False
-        t.clear_table()
-        t.deal()        
-        winner = -3
-    choice = input("Hit (H), Stand (S), Split (SS), Double (D), Surrender (Su) ") 
-    if choice == 'H':
+        t.deal_new_hand()
+    choice = input("Hit (H,h), Stand (S,s) ")#, Split (SS), Double (D), Surrender (Su) ") 
+    if choice == 'H' or choice == 'h':
         #hit
-        print('Hitting')
-        if t.hit() == -2:
+        if t.hit() == -1:
             t.stand()
-            winner = -2
-    elif choice == 'S':
+            t.player_bust = True
+            print("Bust! -- House Wins")
+    elif choice == 'S' or choice == 's':
         #stand
-        print('Standing')
-        turn = False
         winner = t.stand()
         if(winner == -1):
             print("House wins :(")
