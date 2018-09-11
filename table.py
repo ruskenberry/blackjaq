@@ -85,7 +85,7 @@ class Table:
 
     def check_winner(self):
         self.new_hand = True
-        if self.check_bust(self.dealer_hand) > 0 and self.check_hand(self.dealer_hand) > self.check_hand(self.player_hand):
+        if (self.check_bust(self.player_hand) < 0) or (self.check_bust(self.dealer_hand) > 0 and self.check_hand(self.dealer_hand) > self.check_hand(self.player_hand)):
             return -1
         elif self.check_hand(self.dealer_hand) == self.check_hand(self.player_hand):
             return 0
@@ -94,7 +94,6 @@ class Table:
 
     def record_handler(self): 
         recorder = []
-        print(self.hit_count)
         recorder.append(self.check_winner())
         for j in range(self.hit_count+1):
             if j == 0:
@@ -105,8 +104,8 @@ class Table:
             else:
                 recorder.append('1')
                 recorder.append(self.player_hand[j+1])
-                recorder.append(self.check_hand(self.player_hand, j+2))
-        with open('games.csv', 'a') as csvfile:
+                recorder.append(self.check_hand(self.player_hand, j+1))
+        with open('games_10.csv', 'a') as csvfile:
             filewriter = csv.writer(csvfile, delimiter=',',quotechar='|', quoting=csv.QUOTE_MINIMAL)
             #dealerUpCard, card1, card2, hit1, card3, totalAfter3, hit2, card4, totalAfter4, hit3, card5, totalAfter5
             filewriter.writerow([recorder])

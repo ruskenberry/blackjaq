@@ -11,7 +11,7 @@ t.deal()
 choice = "play"
 count = 0
 
-while True:
+while count <= 5:
     if (count != 0 and t.new_hand == True) or t.player_bust == True:
         print("*************************************")       
         t.deal_new_hand()
@@ -32,3 +32,4 @@ while True:
         else:
             print("You win! xD") 
     count += 1
+print('10M games complete')
